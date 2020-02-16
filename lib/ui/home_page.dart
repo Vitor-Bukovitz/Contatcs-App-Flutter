@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:contacts_app/helpers/contact_helper.dart';
+import 'package:contacts_app/ui/contact_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,7 +34,9 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _showContactPage();
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
       ),
@@ -42,6 +45,9 @@ class _HomePageState extends State<HomePage> {
         itemCount: contacts.length,
         itemBuilder: (context, index) {
           return GestureDetector(
+            onTap: (){
+              _showContactPage(contact: contacts[index]);
+            },
             child: Card(
               child: Padding(
                 padding: EdgeInsets.all(10),
@@ -91,4 +97,11 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  void _showContactPage({Contact contact}) {
+    Navigator.push(context, 
+      MaterialPageRoute(builder: (context) => ContactPage(contact: contact))
+    );
+  }
+
 }
