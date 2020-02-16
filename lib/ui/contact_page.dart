@@ -53,17 +53,23 @@ class _ContactPageState extends State<ContactPage> {
                   FlatButton(
                     child: Text("Cancel"),
                     onPressed: (){
-                      
+                      Navigator.pop(context);
                     },
                   ),
                   FlatButton(
                     child: Text("Confirm"),
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
                   ),
                 ],
               );
             }
           );
+          return Future.value(false);
+        } else{
+          return Future.value(true);
         }
       },
       child: Scaffold(
