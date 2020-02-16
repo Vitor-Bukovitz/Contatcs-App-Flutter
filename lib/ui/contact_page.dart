@@ -13,6 +13,10 @@ class ContactPage extends StatefulWidget {
 
 class _ContactPageState extends State<ContactPage> {
 
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
+
   Contact _editedContact;
 
   @override
@@ -23,6 +27,10 @@ class _ContactPageState extends State<ContactPage> {
       _editedContact = Contact();
     } else {
       _editedContact = Contact.fromMap(widget.contact.toMap());
+      
+      _nameController.text = _editedContact.name;
+      _emailController.text = _editedContact.email;
+      _phoneController.text= _editedContact.phone;
     }
   }
 
@@ -56,6 +64,7 @@ class _ContactPageState extends State<ContactPage> {
               ),
             ),
             TextField(
+              controller: _nameController,
               decoration: InputDecoration(
                 labelText: "Name"
               ),
@@ -66,6 +75,7 @@ class _ContactPageState extends State<ContactPage> {
               },
             ),
             TextField(
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: "Email"
@@ -75,6 +85,7 @@ class _ContactPageState extends State<ContactPage> {
               },
             ),
             TextField(
+              controller: _phoneController,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 labelText: "Phone"
