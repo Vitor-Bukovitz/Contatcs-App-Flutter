@@ -13,7 +13,6 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
-
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -32,44 +31,43 @@ class _ContactPageState extends State<ContactPage> {
       _editedContact = Contact();
     } else {
       _editedContact = Contact.fromMap(widget.contact.toMap());
-      
+
       _nameController.text = _editedContact.name;
       _emailController.text = _editedContact.email;
-      _phoneController.text= _editedContact.phone;
+      _phoneController.text = _editedContact.phone;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (){
-        if(_userEdited){
+      onWillPop: () {
+        if (_userEdited) {
           showDialog(
-            context: context,
-            builder: (context){
-              return AlertDialog(
-                title: Text("Discard all changes?"),
-                content: Text("If you leave now, the changes will be lose."),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text("Cancel"),
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
-                  ),
-                  FlatButton(
-                    child: Text("Confirm"),
-                    onPressed: (){
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-            }
-          );
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("Discard all changes?"),
+                  content: Text("If you leave now, the changes will be lose."),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text("Cancel"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    FlatButton(
+                      child: Text("Confirm"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              });
           return Future.value(false);
-        } else{
+        } else {
           return Future.value(true);
         }
       },
@@ -81,7 +79,7 @@ class _ContactPageState extends State<ContactPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            if(_editedContact.name.isNotEmpty && _editedContact != null){
+            if (_editedContact.name.isNotEmpty && _editedContact != null) {
               Navigator.pop(context, _editedContact);
             } else {
               FocusScope.of(context).requestFocus(_nameFocus);
@@ -95,9 +93,10 @@ class _ContactPageState extends State<ContactPage> {
           child: Column(
             children: <Widget>[
               GestureDetector(
-                onTap: (){
-                  ImagePicker.pickImage(source: ImageSource.camera).then((file){
-                    if(file == null) return;
+                onTap: () {
+                  ImagePicker.pickImage(source: ImageSource.camera)
+                      .then((file) {
+                    if (file == null) return;
                     setState(() {
                       _editedContact.img = file.path;
                     });
@@ -111,16 +110,15 @@ class _ContactPageState extends State<ContactPage> {
                       image: DecorationImage(
                           image: _editedContact.img != null
                               ? FileImage(File(_editedContact.img))
-                              : AssetImage("images/person.png"))),
+                              : AssetImage("images/person.png"),
+                          fit: BoxFit.cover)),
                 ),
               ),
               TextField(
                 controller: _nameController,
                 focusNode: _nameFocus,
-                decoration: InputDecoration(
-                  labelText: "Name"
-                ),
-                onChanged: (text){
+                decoration: InputDecoration(labelText: "Name"),
+                onChanged: (text) {
                   _userEdited = true;
                   setState(() {
                     _editedContact.name = text;
@@ -130,10 +128,8 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: "Email"
-                ),
-                onChanged: (text){
+                decoration: InputDecoration(labelText: "Email"),
+                onChanged: (text) {
                   _userEdited = true;
                   _editedContact.email = text;
                 },
@@ -141,10 +137,8 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: "Phone"
-                ),
-                onChanged: (text){
+                decoration: InputDecoration(labelText: "Phone"),
+                onChanged: (text) {
                   _userEdited = true;
                   _editedContact.phone = text;
                 },
