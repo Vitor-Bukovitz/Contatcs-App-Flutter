@@ -75,7 +75,13 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: FlatButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        helper.deleteContact(contacts[index].id);
+                        setState(() {
+                          contacts.removeAt(index);
+                          Navigator.pop(context);
+                        });
+                      },
                       child: Text(
                         "Delete",
                         style: TextStyle(
