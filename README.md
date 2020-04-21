@@ -1,6 +1,6 @@
 # contacts_app
 
-A new Flutter project.
+A flutter project that saves your contacts informations.
 
 ## Getting Started
 
