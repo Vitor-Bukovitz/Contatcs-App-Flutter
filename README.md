@@ -1,4 +1,4 @@
-# contacts_app
+# Contacts-App-Flutter
 
 A flutter project that saves your contacts informations.
 
